@@ -133,14 +133,16 @@ const ClientTable: React.FC = () => {
                 </select>
               </td>
               <td className="py-2 px-4">
-                <label className="inline-flex items-center">
+                <label className="relative toggle-checkbox">
                   <input
                     type="checkbox"
                     checked={row.accountStatus}
                     onChange={() => handleToggleStatus(row.id)}
-                    className="form-checkbox"
+                    className="absolute opacity-0 z-[1] w-full h-full "
                   />
-                <span></span>
+                  <span className="indicator ">
+                  <span className="dot"></span>
+                </span>
 
 
                 </label>

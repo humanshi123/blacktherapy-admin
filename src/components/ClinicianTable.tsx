@@ -160,12 +160,17 @@ const ClinicianTable: React.FC = () => {
               <td>{row.memberSince}</td>
               <td>{row.noOfAppointments}</td>
               <td>
-                <input
+               <div className="toggle-checkbox relative">
+               <input
                   type="checkbox"
                   checked={row.accountStatus}
                   onChange={() => handleToggleStatus(row.id)}
-                  className="toggle-checkbox"
+                  className="absolute opacity-0 z-[1] w-full h-full "
                 />
+                <span className="indicator ">
+                  <span className="dot"></span>
+                </span>
+               </div>
               </td>
               <td>
                 <div className="flex gap-2">
