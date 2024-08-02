@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background-start-rgb: #E7F8F6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: var(--background-start-rgb);
+  font-size: 14px;
+}
+body, a, p {
+  font-family:var(--font-gotham); 
+}
+p{
+  color: #686C78;
+}
+h1{
+  font-family:var(--font-antic); 
+}
+h2 {
+  font-family:var(--font-GothamPro-Bold);  
+  color: #283C63; 
+}
+h3, h4, h5 ,h6 {
+  font-family:var(--font-GothamPro-Medium); 
+  color: #283C63;
+}
+h2{
+ font-size: 30px;  
+ font-style: normal; 
+ line-height: 46px;
+ color: #283C63;
+}
+h3{
+font-size: 26px;
+ font-style: normal;
+ line-height: 36px; 
+ color: #283C63;
+}
+h5{
+  font-size: 18px;
+}
+h6{
+  font-size: 16px;
+}
+th, td {
+  padding: 11px 20px;
+  color: #686C78;
+}
+.table-common {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.table-common  table {
+  width: 100%;
+  min-width: 800px;
+  background: #FFFFFF;
+}
+.table-common table thead tr {
+  background: #26395E;
+}
+.table-common table tbody tr td:first-child {
+  color: #26395E;
+}
+.table-common table tbody tr:nth-child(even) {
+  background: #EBF3F8;
+}
+.table-common table thead tr th {
+  color: #fff;
+  font-weight: normal;
+  text-align: left;
+  font-size: 14px;
+  padding: 14px 20px;
+}
+.pagination-custom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 50px;
+  border: solid 1px #D5DCEA;
+  border-radius: 5px;
+}
+.pagination-custom-outer {
+  display: flex;
+  justify-content: flex-end;
+}
+.pagination-custom-outer button {
+  width: 36px;
+  height: 36px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border-radius: 5px;
+  font-size: 12px;
+}
+button:disabled {
+  opacity: 0.4;
+}
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: none;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button {
+color: #FFF;
+font-size: 16px;
+line-height: 24px;
+border-radius: 5px;
+background: #283C63;
+padding: 10px 18px;
+height: 50px;
+display: flex;
+align-items: center;
+gap: 15px;
+}
+.modal label {
+color: #707070;
+font-size: 12px;
+}
+select, input, .modal select {
+  height: 50px;
+  color: #707070;
+font-size: 14px;
+line-height: 24px; 
+}
+
+@media screen and (max-width: 1023px) {
+  h2{
+    font-size: 26px;
+   line-height: 38px;
+  }
+  h3{
+  font-size: 22px; 
+   line-height: 30px;
+  }
+}
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
