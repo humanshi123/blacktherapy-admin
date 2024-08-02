@@ -57,6 +57,7 @@ h6{
 th, td {
   padding: 11px 20px;
   color: #686C78;
+  white-space: nowrap;
 }
 .table-common {
   overflow-x: auto;
@@ -82,6 +83,25 @@ th, td {
   text-align: left;
   font-size: 14px;
   padding: 14px 20px;
+}
+.overflo-custom::-webkit-scrollbar-track
+{
+  background-color: #ffffff;
+  height: 6px;
+}
+
+.overflo-custom::-webkit-scrollbar
+{
+  width: 6px;
+  background-color: #283C63;
+  height: 6px;
+}
+
+.overflo-custom::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  background-color: #283C6355; 
+  height: 6px;
 }
 .pagination-custom {
   display: flex;
@@ -125,7 +145,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
 color: #FFF;
 font-size: 16px;
 line-height: 24px;
-border-radius: 5px;
+border-radius: 10px;
 background: #283C63;
 padding: 10px 18px;
 height: 50px;
@@ -142,6 +162,13 @@ select, input, .modal select {
   color: #707070;
 font-size: 14px;
 line-height: 24px; 
+border: 1px solid #CDE3F1;
+border-radius: 10px;
+width: 100%;
+padding: 10px 15px;
+}
+.add-clinician div {
+ width: calc(33.33% - 30px);
 }
 
 @media screen and (max-width: 1023px) {

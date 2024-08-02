@@ -8,7 +8,7 @@ export interface TableData {
   id: number;
   client: string;
   assignedClinician: string;
-  assignedPeerSupport: string;
+  assignedPeerSupport: string; 
   status: string;
 }
 
