@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
-import "tailwindcss/tailwind.css";
 import EditClinicianModal from "./EditClinicianModal";
 import AssignTaskModal from "./AssignTaskModal";
 import { DeleteIcon, EditIcon } from "@/utils/svgicon";

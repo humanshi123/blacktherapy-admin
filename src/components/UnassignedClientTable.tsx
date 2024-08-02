@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import Modal from 'react-modal';
-import 'tailwindcss/tailwind.css';
 import { ButtonArrow } from '@/utils/svgicon';
 
 export interface TableData {

@@ -2,7 +2,6 @@
 import { DeleteIcon } from '@/utils/svgicon';
 import { useState } from 'react';
 import Modal from 'react-modal';
-import 'tailwindcss/tailwind.css';
 import Image from 'next/image';
 import deleteCross from "../assets/images/deleteCross.png"
 
