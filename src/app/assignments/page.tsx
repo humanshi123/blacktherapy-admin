@@ -1,6 +1,5 @@
 "use client"
 import AssignedClientsTable from "@/components/AssignedClientsTable";
-import DashboardAssignment from "@/components/DashboardAssignment";
 import SearchBar from "@/components/SearchBar";
 import UnassignedClientTable, {TableData} from "@/components/UnassignedClientTable";
 import { useState } from "react";
