@@ -20,7 +20,7 @@ interface TableData {
 
 }
 
-const ClientTable = () => {
+const ClientTable: React.FC = () => {
   const initialData: TableData[] = [
     {
       id: 'F123',

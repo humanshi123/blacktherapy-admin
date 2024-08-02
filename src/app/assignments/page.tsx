@@ -4,7 +4,7 @@ import SearchBar from "@/components/SearchBar";
 import UnassignedClientTable, {TableData} from "@/components/UnassignedClientTable";
 import { useState } from "react";
 
-const Page = () => {
+const Page: React.FC = () => {
   const initialData: TableData[] = [
     { id: 1, client: 'Client A', assignedClinician: 'No Clinician Assigned', assignedPeerSupport: 'No Peer Support Assigned', status: 'Unassigned' },
     { id: 2, client: 'Client B', assignedClinician: 'No Clinician Assigned', assignedPeerSupport: 'No Peer Support Assigned', status: 'Unassigned' },
