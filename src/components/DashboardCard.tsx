@@ -2,7 +2,7 @@
 import React from 'react';
 
 interface OverviewProps {
-  icon: string | number; 
+  icon: React.ReactNode; 
   title: string;
   value: number | string;
 };
