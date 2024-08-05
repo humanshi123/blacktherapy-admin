@@ -3,6 +3,7 @@ import { DeleteIcon } from '@/utils/svgicon';
 import { useState } from 'react';
 import Modal from 'react-modal';
 import Image from 'next/image';
+import ReactPaginate from 'react-paginate';
 import deleteCross from "../assets/images/deleteCross.png"
 
 interface TableData {
@@ -47,6 +48,7 @@ const ClientTable: React.FC = () => {
     // Add more data as needed
   ];
 
+  const [currentPage, setCurrentPage] = useState(0);
   const [data, setData] = useState<TableData[]>(initialData);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState<TableData | null>(null);
@@ -57,6 +59,16 @@ const ClientTable: React.FC = () => {
         item.id === id ? { ...item, accountStatus: !item.accountStatus } : item
       )
     );
+  };
+
+  const rowsPerPage = 4;
+
+  const indexOfLastRow = (currentPage + 1) * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentRows = data.slice(indexOfFirstRow, indexOfFirstRow + rowsPerPage);
+
+  const handlePageClick = (selectedItem: { selected: number }) => {
+    setCurrentPage(selectedItem.selected);
   };
 
   const handleEdit = (row: TableData) => {
@@ -167,8 +179,27 @@ const ClientTable: React.FC = () => {
           ))}
         </tbody>
       </table>
-</div>
 
+</div>
+<div className="text-right">
+      <ReactPaginate
+        previousLabel={'<'}
+        nextLabel={'>'}
+        breakLabel={'...'}
+        breakClassName={'break-me'}
+        pageCount={Math.ceil(data.length / rowsPerPage)}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageClick}
+        containerClassName={'inline-flex mt-[34px] rounded-[5px] border border-[#d5dce9]'}
+        pageClassName={'text-[#26395e] '}  //list item
+        pageLinkClassName ={'py-2 px-4 inline-block'} //anchor tag
+        activeClassName={'bg-[#26395e] rounded-[5px] text-white'} //active anchor
+        previousLinkClassName={'py-2 px-4 inline-block'}
+        nextLinkClassName={'py-2 px-4 inline-block'}
+        disabledClassName={'opacity-50 cursor-not-allowed'}
+      />
+      </div>
 
       {/* Delete Modal */}
       <Modal

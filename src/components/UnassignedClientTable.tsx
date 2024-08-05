@@ -7,7 +7,7 @@ export interface TableData {
   id: number;
   client: string;
   assignedClinician: string;
-  assignedPeerSupport: string; 
+  assignedPeerSupport: string;  
   status: string;
 }
 
@@ -75,6 +75,7 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
   };
 
   return (
+    <div>
     <div className="table-common overflo-custom">
       <table className="">
         <thead>
@@ -100,7 +101,7 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
           ))}
         </tbody>
       </table>
-
+      </div>
       <div className="text-right">
       <ReactPaginate
         previousLabel={'<'}

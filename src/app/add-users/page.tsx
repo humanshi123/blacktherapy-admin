@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, ChangeEvent, FormEvent } from "react";
-
 import { ButtonArrow, DeleteIcon } from "@/utils/svgicon";
 import { v4 as uuidv4 } from "uuid";
 import deleteCross from "../../assets/images/deleteCross.png";

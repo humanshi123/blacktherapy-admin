@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 import deleteCross from "../../assets/images/deleteCross.png"
 import Modal from 'react-modal';
 import Image from "next/image";
+import ReactPaginate from 'react-paginate';
+import SearchBar from "@/components/SearchBar";
 interface FormData {
     id: string;
     title: string;
@@ -23,10 +25,22 @@ const Page = () => {
     description: "",
   });
 
+  const [currentPage, setCurrentPage] = useState(0);
   const [data, setData] = useState<FormData[]>([]);
   const [selectedTab, setSelectedTab] = useState<"Client" | "Clinician">("Client");
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState<string | null>(null);
+
+  const rowsPerPage = 4;
+
+  const indexOfLastRow = (currentPage + 1) * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentRows = data.slice(indexOfFirstRow, indexOfFirstRow + rowsPerPage);
+
+  const handlePageClick = (selectedItem: { selected: number }) => {
+    setCurrentPage(selectedItem.selected);
+  };
+
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, files } = e.target as HTMLInputElement & { files: FileList };
@@ -172,7 +186,8 @@ const Page = () => {
         </form>
       </div>
       <div className="mt-[50px]">
-        <div className="flex gap-5 mb-4">
+    <div className="flex justify-between">
+    <div className="flex gap-5 mb-4">
         <button
             className={`h-[46px] py-3 px-4 text-sm rounded-[5px] border border-[#283c63] ${selectedTab === "Client" ? 'active bg-[#283c63] !text-white' : ''} text-[#26395e]`}
             
@@ -188,6 +203,8 @@ const Page = () => {
             Clinician Training Portal
           </button>
         </div>
+        <SearchBar />
+    </div>
         <div className="table-common overflo-custom">
         <table className="">
           <thead>
@@ -204,6 +221,25 @@ const Page = () => {
           <tbody>{renderTableRows()}</tbody>
         </table>
         </div>
+        <div className="text-right">
+      <ReactPaginate
+        previousLabel={'<'}
+        nextLabel={'>'}
+        breakLabel={'...'}
+        breakClassName={'break-me'}
+        pageCount={Math.ceil(data.length / rowsPerPage)}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageClick}
+        containerClassName={'inline-flex mt-[34px] rounded-[5px] border border-[#d5dce9]'}
+        pageClassName={'text-[#26395e] '}  //list item
+        pageLinkClassName ={'py-2 px-4 inline-block'} //anchor tag
+        activeClassName={'bg-[#26395e] rounded-[5px] text-white'} //active anchor
+        previousLinkClassName={'py-2 px-4 inline-block'}
+        nextLinkClassName={'py-2 px-4 inline-block'}
+        disabledClassName={'opacity-50 cursor-not-allowed'}
+      />
+      </div>
         <Modal
         isOpen={isDeleteModalOpen}
         onRequestClose={handleModalClose}

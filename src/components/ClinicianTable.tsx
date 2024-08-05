@@ -130,6 +130,7 @@ const ClinicianTable: React.FC = () => {
   };
 
   return (
+    <div>
     <div className="table-common overflo-custom">
       <table className="">
         <thead>
@@ -214,6 +215,7 @@ const ClinicianTable: React.FC = () => {
           ))}
         </tbody>
       </table>
+      </div>
       <div className="text-right">
       <ReactPaginate
         previousLabel={'<'}
