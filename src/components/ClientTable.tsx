@@ -91,30 +91,31 @@ const ClientTable: React.FC = () => {
 
   return (
     <div className="">
-<div className='table-common'>
+<div className='table-common overflo-custom'>
 <table className="">
         <thead className="">
           <tr>
-            <th className="py-2 px-4">ID</th>
-            <th className="py-2 px-4">Status</th>
-            <th className="py-2 px-4">Client</th>
-            <th className="py-2 px-4">Contact</th>
-            <th className="py-2 px-4">Member Since</th>
-            <th className="py-2 px-4">Assignments</th>
-            <th className="py-2 px-4">Actions</th>
-            <th className="py-2 px-4">Account Status</th>
-            <th className="py-2 px-4">Actions</th>
+            <th>ID</th>
+            <th>Status</th>
+            <th>Client</th>
+            <th>Contact</th>
+            <th>Member Since</th>
+            <th>Assignments</th>
+            <th>Actions</th>
+            <th>Account Status</th>
+            <th>Actions</th>
           </tr> 
         </thead>
         <tbody>
           {data.map((row) => (
             <tr key={row.id} className="border-b">
-              <td className="py-2 px-4">{row.id}</td>
-              <td className="py-2 px-4">{row.status}</td>
-              <td className="py-2 px-4">{row.clientName}</td>
-              <td className="py-2 px-4">{row.contact}</td>
-              <td className="py-2 px-4">{row.memberSince}</td>
-              <td className="py-2 px-4">{row.assignments}</td>
+              <td>{row.id}</td>
+              <td>
+               <p className='font-gothamMedium rounded-3xl py-[2px] px-[10px] text-[#5E2626] bg-[#FFCCCC] text-[10px] '>{row.status}</p> </td>
+              <td>{row.clientName}</td>
+              <td>{row.contact}</td>
+              <td>{row.memberSince}</td>
+              <td>{row.assignments}</td>
               <td>
                 <select
                   name="status2"
@@ -177,22 +178,24 @@ const ClientTable: React.FC = () => {
         className="modal max-w-[584px] mx-auto bg-white rounded-xl w-full p-5 "
         overlayClassName="overlay"
       >
-        <Image src={deleteCross} alt='delete' height={174} width={174} />
-        <p>Are you sure you want to Delete?</p>
-        <button
+          <Image src={deleteCross} alt='delete' height={174} width={174} className="mx-auto" />
+        <h2 className="text-[20px] text-center leading-normal mt-[-20px]">Are you sure you want to Delete?</h2>
+   <div className="flex items-center justify-center gap-6 mt-8">
+   <button 
           type="button"
           onClick={handleDeleteConfirm}
-          className="mt-4 py-[10px] px-8 bg-[#CC0000] text-white rounded"
+          className="py-[10px] px-8 bg-[#CC0000] text-white rounded"
         >
           Yes, Delete
         </button>
         <button 
         type="button"
         onClick={handleDeleteCancel}
-        className='mt-4 py-[10px] px-8 bg-[#283C63] text-white rounded'
+        className='py-[10px] px-8 bg-[#283C63] text-white rounded'
         >
             No
         </button>
+   </div>
       </Modal>
 
     </div>

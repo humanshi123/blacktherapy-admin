@@ -19,7 +19,7 @@ const rowsPerPage = 4;
 
   return (
     <div>
-    <div className="table-common">
+    <div className="table-common overflo-custom">
       <table className="">
         <thead>
           <tr>

@@ -75,7 +75,7 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
   };
 
   return (
-    <div className="table-common">
+    <div className="table-common overflo-custom">
       <table className="">
         <thead>
           <tr>
