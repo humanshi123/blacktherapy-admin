@@ -143,7 +143,7 @@ const ClientTable: React.FC = () => {
                     name="actionss"
                     value={row.actionss}
                     onChange={handleInputChange}
-                    className="border-none bg-transparent"
+                    className="w-auto border-none h-auto bg-transparent p-0"
                   >
                     <option value="Applicant Reviewed">Applicant Reviewed</option>
                     <option value="Interview Pending">Interview Pending</option>
@@ -202,7 +202,7 @@ const ClientTable: React.FC = () => {
         isOpen={isDeleteModalOpen}
         onRequestClose={handleModalClose}
         contentLabel="Delete Item"
-        className="modal max-w-[584px] mx-auto bg-white rounded-xl w-full p-5 "
+        className="modal max-w-[584px] mx-auto bg-white rounded-xl w-full p-5 bg-flower"
         overlayClassName="overlay"
       >
         <Image src={deleteCross} alt='delete' height={174} width={174} className="mx-auto" />

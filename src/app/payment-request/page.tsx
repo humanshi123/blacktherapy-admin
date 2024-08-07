@@ -180,6 +180,7 @@ const Page: React.FC = () => {
         {activeTab === "pending" && (
           <td>
             <select
+            className="w-auto border-none h-auto bg-transparent p-0"
               onChange={(e) =>
                 e.target.value === "Approve"
                   ? handleApprove(payment)
@@ -188,7 +189,7 @@ const Page: React.FC = () => {
               defaultValue=""
             >
               <option value="" disabled>
-                Select
+                Action
               </option>
               <option value="Approve">Approve</option>
               <option value="Reject">Reject</option>

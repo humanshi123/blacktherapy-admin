@@ -46,7 +46,7 @@ const ClinicianTable: React.FC = () => {
       memberSince: "2021-02-01",
       noOfAppointments: 3,
       accountStatus: false,
-      status2: "Applicant Reviewed",
+      status2: "Status ",
     },
     {
       id: 12,
@@ -83,7 +83,7 @@ const ClinicianTable: React.FC = () => {
   const [tableData, setTableData] = useState(data); // State to hold table data
   const rowsPerPage = 2;
 
-  // Calculate the indexes for slicing the data array
+  // Calculate the indexes for slicing the data array 
   const indexOfLastRow = (currentPage + 1) * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = tableData.slice(
@@ -223,8 +223,9 @@ const ClinicianTable: React.FC = () => {
                   name="status2"
                   value={row.status2}
                   onChange={handleInputChange}
-                  className="w-full p-2 border rounded"
+                  className="w-auto border-none h-auto bg-transparent p-0"
                 >
+                  <option value="Status">Status</option>
                   <option value="Applicant Reviewed">Applicant Reviewed</option>
                   <option value="Interview Pending">Interview Pending</option>
                   <option value="Incomplete Application">
@@ -263,7 +264,7 @@ const ClinicianTable: React.FC = () => {
         isOpen={isDeleteModalOpen}
         onRequestClose={handleModalClose}
         contentLabel="Delete Clinician"
-        className="modal max-w-[584px] mx-auto bg-white rounded-xl w-full p-5 "
+        className="modal max-w-[584px] mx-auto bg-white rounded-xl w-full p-5 bg-flower"
         overlayClassName="overlay"
       >
           <Image src={deleteCross} alt='delete' height={174} width={174} className="mx-auto" />

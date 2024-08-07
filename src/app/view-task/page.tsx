@@ -156,7 +156,7 @@ const TableComponent: React.FC = () => {
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
           contentLabel="Confirm Deletion"
-          className="bg-white w-[90%] max-w-[668px] max-h-[90vh] overflow-auto"
+          className="bg-white w-[90%] max-w-[668px] max-h-[90vh] overflow-auto bg-flower"
           overlayClassName="w-full h-full fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center"
         >
           <Image src={deleteCross} alt='delete' height={174} width={174} className="mx-auto" />

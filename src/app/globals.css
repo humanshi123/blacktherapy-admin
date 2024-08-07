@@ -103,26 +103,15 @@ th, td {
   background-color: #283C6355; 
   height: 6px;
 }
-.pagination-custom {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-top: 50px;
-  border: solid 1px #D5DCEA;
-  border-radius: 5px;
+label {
+  color: #707070;
+font-size: 12px;
 }
-.pagination-custom-outer {
-  display: flex;
-  justify-content: flex-end;
-}
-.pagination-custom-outer button {
-  width: 36px;
-  height: 36px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  border-radius: 5px;
-  font-size: 12px;
+.bg-flower {
+background-image: url(../assets/images/card-bg.png);
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
 }
 button:disabled {
   opacity: 0.4;

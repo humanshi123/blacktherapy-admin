@@ -1,3 +1,4 @@
+import { ButtonArrow } from '@/utils/svgicon';
 import React from 'react';
 import Modal from 'react-modal';
 
@@ -15,28 +16,18 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({ isOpen, onRequestClos
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       contentLabel="Assign Task"
-      className="modal max-w-[800px] mx-auto bg-white rounded-xl w-full p-5"
+      className="modal bg-white w-[90%] max-w-[668px] max-h-[90vh] rounded-xl overflow-auto overflo-custom "
       overlayClassName="overlay"
     >
-      <h2 className="text-xl font-semibold mb-4">Assign Task</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="grid grid-cols-2 gap-4">
+      <h2 className="text-white bg-[#283C63] py-8 font-gothamMedium px-[50px]  ">Assign Task</h2>
+      <form onSubmit={handleFormSubmit} className='py-[40px] px-[60px]'>
+        <div className="grid gap-[30px  ] ">
           <div>
-            <label className="block mb-2">Task Name</label>
+            <label className="block mb-2">Title</label>
             <input
               type="text"
               name="taskName"
-              value={formData.taskName}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded"
-            />
-          </div>
-          <div>
-            <label className="block mb-2">Assigned To</label>
-            <input
-              type="text"
-              name="assignedTo"
-              value={formData.assignedTo}
+              value={formData.title}
               onChange={handleInputChange}
               className="w-full p-2 border rounded"
             />
@@ -65,8 +56,28 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({ isOpen, onRequestClos
               <option value="Low">Low</option>
             </select>
           </div>
+          <div>
+            <label className="block mb-2">Choose File</label>
+            <input
+              type="file"
+              name="assignedTo"
+              value={formData.choosefile}
+              onChange={handleInputChange}
+              className="w-full p-2 border rounded"
+            />
+          </div>
+          <div>
+            <label className="block mb-2">Note</label>            
+            <input
+              type="text"
+              name="assignedTo"
+              value={formData.note}
+              onChange={handleInputChange}
+              className="w-full p-2 border rounded"
+            />
+          </div>
         </div>
-        <button type="submit" className="mt-4 p-2 bg-blue-500 text-white rounded">Submit</button>
+       <div className='flex justify-end'> <button type="submit" className="button mt-5">Submit<ButtonArrow /> </button></div>
       </form>
     </Modal>
   );
