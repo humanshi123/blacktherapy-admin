@@ -5,6 +5,7 @@ import Image from 'next/image';
 import ReactPaginate from 'react-paginate';
 import deleteCross from "../../assets/images/deleteCross.png"
 import { DeleteIcon } from '@/utils/svgicon';
+import SearchBar from '@/components/SearchBar';
 
 interface TableData {
   id: number;
@@ -107,7 +108,10 @@ const TableComponent: React.FC = () => {
       <h1 className="font-antic text-[#283C63] text-[30px] leading-[1.2em] mb-[25px] lg:text-[40px] lg:mb-[50px]">
         All Tasks
       </h1>
-      <div className='table-common overflow-auto'>
+      <div className='flex justify-end mb-5'>
+        <SearchBar />
+      </div>
+      <div className='table-common overflo-custom'>
         <table className="">
           <thead>
             <tr>
