@@ -48,6 +48,30 @@ const ClinicianTable: React.FC = () => {
       accountStatus: false,
       status2: "Applicant Reviewed",
     },
+    {
+      id: 12,
+      status: "Active",
+      training: "Training 1",
+      name: "Clinician A",
+      contact: "123456789",
+      address: "Address 1",
+      memberSince: "2021-01-01",
+      noOfAppointments: 5,
+      accountStatus: true,
+      status2: "Interview Pending",
+    },
+    {
+      id: 13,
+      status: "Inactive",
+      training: "Training 2",
+      name: "Clinician B",
+      contact: "987654321",
+      address: "Address 2",
+      memberSince: "2021-02-01",
+      noOfAppointments: 3,
+      accountStatus: false,
+      status2: "Applicant Reviewed",
+    },
     // Add more data as needed
   ];
 
@@ -57,7 +81,7 @@ const ClinicianTable: React.FC = () => {
   const [isAssignTaskModalOpen, setIsAssignTaskModalOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState<TableData | null>(null);
   const [tableData, setTableData] = useState(data); // State to hold table data
-  const rowsPerPage = 4;
+  const rowsPerPage = 2;
 
   // Calculate the indexes for slicing the data array
   const indexOfLastRow = (currentPage + 1) * rowsPerPage;

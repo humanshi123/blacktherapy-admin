@@ -10,7 +10,7 @@ const Page = () => {
     <div className=" bg-white rounded-[10px] w-full p-5">
       <form>
           <div className="add-clinician flex flex-wrap gap-[30px] ">
-            <div className="!w-[calc(50%-30px)]">
+            <div className="md:!w-[calc(50%-30px)]">
               <label className="block mb-2">What type of service are you looking for?</label>
               <select
                 name="assignedClinician"
@@ -23,7 +23,7 @@ const Page = () => {
                 <option value="Clinician 3">Clinician 3</option>
               </select>
             </div>
-            <div className="!w-[calc(50%-30px)]">
+            <div className="md:!w-[calc(50%-30px)]">
               <label className="block mb-2">Want to check how much insurance will pay for?</label>
               <select
                 name="assignedPeerSupport"

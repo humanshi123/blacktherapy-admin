@@ -4,7 +4,8 @@ import deleteCross from "../../assets/images/deleteCross.png"
 import Modal from 'react-modal';
 import Image from "next/image";
 import { ButtonArrow, DeleteIcon } from '@/utils/svgicon';
-
+import ReactPaginate from 'react-paginate';
+import success from "../../assets/images/succes.png"
 
 interface CallData {
   id: number;
@@ -59,8 +60,19 @@ const Page: React.FC = () => {
     time: ''
   });
 
+  const [currentPage, setCurrentPage] = useState(0);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [notification, setNotification] = useState<string | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
+
+  const rowsPerPage = 4;
+  const indexOfLastRow = (currentPage + 1) * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentRows = calls.slice(indexOfFirstRow, indexOfFirstRow + rowsPerPage);
+  const handlePageClick = (selectedItem: { selected: number }) => {
+    setCurrentPage(selectedItem.selected);
+  };
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -85,7 +97,12 @@ const Page: React.FC = () => {
       date: '',
       time: ''
     });
+    setNotification("Call Log Added Successfully");
+    setTimeout(() => {
+      setNotification(null);
+    }, 3000);
   };
+  
 
   const openModal = (id: number) => {
     setDeleteId(id);
@@ -220,6 +237,15 @@ const Page: React.FC = () => {
         </form>
       </div>
 
+      {notification && (
+      <div className="fixed inset-0 grid place-items-center w-full h-full bg-gray-500 bg-opacity-75">
+        <div className='bg-white text-[#283C63] py-[60px] rounded-[20px] shadow-lg max-w-[584px] w-full '>
+         <Image src={success} alt='delete' height={130} width={115} className="mx-auto" />
+       <h2 className='text-center mt-[40px]'> {notification}</h2>
+        </div>
+      </div>
+    )}
+
       {/* Display Table */}
       <div className="table-common overflo-custom">
         <h2 className='mb-5  mt-[50px]'>All Users</h2>
@@ -260,7 +286,25 @@ const Page: React.FC = () => {
           </tbody>
         </table>
       </div>
-
+      <div className="text-right">
+      <ReactPaginate
+        previousLabel={'<'}
+        nextLabel={'>'}
+        breakLabel={'...'}
+        breakClassName={'break-me'}
+        pageCount={Math.ceil(calls.length / rowsPerPage)}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={4}
+        onPageChange={handlePageClick}
+        containerClassName={'inline-flex mt-[34px] rounded-[5px] border border-[#d5dce9]'}
+        pageClassName={'text-[#26395e] '}  //list item
+        pageLinkClassName ={'py-2 px-4 inline-block'} //anchor tag
+        activeClassName={'bg-[#26395e] rounded-[5px] text-white'} //active anchor
+        previousLinkClassName={'py-2 px-4 inline-block'}
+        nextLinkClassName={'py-2 px-4 inline-block'}
+        disabledClassName={'opacity-50 cursor-not-allowed'}
+      />
+      </div>
       {/* Delete Modal */}
       <Modal
         isOpen={modalIsOpen}

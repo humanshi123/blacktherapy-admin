@@ -61,7 +61,7 @@ const Home = () => {
       Welcome
     </h1>
     <h2 className="mb-[30px]">Overview</h2>
-   <div className="grid grid-cols-4 gap-[30px]">
+   <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-[15px] md:gap-[30px]">
    {OverviewData.map((card) =>(
     <DashboardCard 
      key={card.id}

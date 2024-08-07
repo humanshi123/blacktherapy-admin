@@ -56,7 +56,7 @@ h6{
 }
 th, td {
   padding: 11px 20px;
-  color: #686C78;
+  color: #26395E;
   white-space: nowrap;
 }
 .table-common {
@@ -72,7 +72,7 @@ th, td {
   background: #26395E;
 }
 .table-common table tbody tr td:first-child {
-  color: #26395E;
+  color: #686C78;
 }
 .table-common table tbody tr:nth-child(even) {
   background: #EBF3F8;
@@ -230,4 +230,9 @@ padding: 10px 15px;
   .text-balance {
     text-wrap: balance;
   }
+}
+@media screen and (max-width: 767px) {
+.add-clinician div {
+  width: 100%;
+}
 }

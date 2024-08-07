@@ -11,7 +11,7 @@ const page = () => {
       </h1>
       <div className=" bg-white rounded-[10px] w-full p-5">
       <form>
-          <div className="grid grid-cols-3 gap-[30px] ">
+          <div className="grid md:grid-cols-3 gap-[30px] ">
             <div className="">
               <label className="block mb-2">First Name</label>
               <input type="text" name="" id="" placeholder="John"/>

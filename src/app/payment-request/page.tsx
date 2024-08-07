@@ -206,6 +206,9 @@ const Page: React.FC = () => {
 
   return (
     <div>
+        <h1 className="font-antic text-[#283C63] text-[30px] leading-[1.2em] mb-[25px] lg:text-[40px] lg:mb-[50px]">
+        Payment Requests
+      </h1>
       <div className="flex space-x-5 mb-4">
         <button
           className={`h-[46px] py-3 px-4 text-sm rounded-[5px] border border-[#283c63] ${activeTab === 'pending' ? 'active bg-[#283c63] !text-white' : ''} text-[#26395e]`}
@@ -343,31 +346,36 @@ const Page: React.FC = () => {
         isOpen={showRejectModal}
         onRequestClose={() => setShowRejectModal(false)}
         contentLabel="Reject Payment"
-        className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75"
-        overlayClassName="overlay"
+        className="bg-white w-[90%] max-w-[668px] max-h-[90vh] overflow-scroll overflo-custom   "
+        overlayClassName="w-full h-full fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center"
       >
-        <div className="bg-white p-8 rounded shadow-md">
-          <h2 className="text-xl mb-4">Reject Payment</h2>
+        <div className="">
+        <h2 className="text-white bg-[#283C63] py-8 font-gothamMedium px-[50px]  ">Reject Note</h2>
+          <div className="py-[40px] px-[60px] ">
           <div className="mb-4">
-            <label className="block mb-2">Note</label>
+            <label className="block mb-2 text-[#707070]">Note</label>
             <textarea
+              rows={4}
               value={rejectNote}
               onChange={(e) => setRejectNote(e.target.value)}
               className="w-full p-2 border rounded"
             ></textarea>
           </div>
+         <div className="flex gap-5 justify-end mt-[40px]">
+         <button
+            onClick={() => setShowRejectModal(false)}
+            className="button"
+          >
+            Close
+          </button>
           <button
             onClick={rejectPayment}
-            className="bg-red-500 text-white px-4 py-2 rounded"
-          >
-            Reject
+            className="button"
+          > Submit <ButtonArrow/>
           </button>
-          <button
-            onClick={() => setShowRejectModal(false)}
-            className="ml-2 bg-gray-500 text-white px-4 py-2 rounded"
-          >
-            Cancel
-          </button>
+         </div>
+      
+          </div>
         </div>
       </Modal>
     </div>
