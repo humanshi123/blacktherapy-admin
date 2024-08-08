@@ -210,7 +210,7 @@ const Page: React.FC = () => {
         <h1 className="font-antic text-[#283C63] text-[30px] leading-[1.2em] mb-[25px] lg:text-[40px] lg:mb-[50px]">
         Payment Requests
       </h1>
-      <div className="flex space-x-5 mb-4">
+      <div className=" grid gap-3 md:gap-0 md:flex md:space-x-5 mb-4">
         <button
           className={`h-[46px] py-3 px-4 text-sm rounded-[5px] border border-[#283c63] ${activeTab === 'pending' ? 'active bg-[#283c63] !text-white' : ''} text-[#26395e]`}
           onClick={() => setActiveTab("pending")}

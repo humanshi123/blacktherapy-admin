@@ -7,8 +7,11 @@ export interface TableData {
   id: number;
   client: string;
   assignedClinician: string;
-  assignedPeerSupport: string;  
+  assignedPeerSupport: string;
   status: string;
+  message?: string;
+  workshop?: string;
+  video?: string;
 }
 
 interface UnassignedClientTableProps {
@@ -24,8 +27,8 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
     assignedClinician: '',
     assignedPeerSupport: '',
     message: '',
-      workshop: '',
-      video: '',
+    workshop: '',
+    video: '',
   });
 
   const rowsPerPage = 4;
@@ -41,11 +44,11 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
   const openModal = (row: TableData) => {
     setCurrentRow(row);
     setFormData({
-      assignedClinician: row.assignedClinician,
-      assignedPeerSupport: row.assignedPeerSupport,
-      message: '',
-      workshop: '',
-      video: '',
+      assignedClinician: row.assignedClinician || '',
+      assignedPeerSupport: row.assignedPeerSupport || '',
+      message: row.message || '',
+      workshop: row.workshop || '',
+      video: row.video || '',
     });
     setIsModalOpen(true);
   };
@@ -54,9 +57,9 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
     setIsModalOpen(false);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value as string });
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {
@@ -66,7 +69,8 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
         ...currentRow,
         assignedClinician: formData.assignedClinician,
         assignedPeerSupport: formData.assignedPeerSupport,
-        status: 'Update Assignment',
+        status: 'Assigned',
+        dateAssigned: new Date().toLocaleDateString(), // Add current date here
       };
 
       moveToAssigned(updatedRow);
@@ -76,50 +80,51 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
 
   return (
     <div>
-    <div className="table-common overflo-custom">
-      <table className="">
-        <thead>
-          <tr>
-            <th className="">ID</th>
-            <th className="">Client</th>
-            <th className="">Assigned Clinician</th>
-            <th className="">Assigned Peer Support</th>
-            <th className="">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentRows.map((row) => (
-            <tr key={row.id}>
-              <td className="">{row.id}</td>
-              <td className="">{row.client}</td>
-              <td className="">{row.assignedClinician}</td>
-              <td className="">{row.assignedPeerSupport}</td>
-              <td className="">
-                <button onClick={() => openModal(row)} className="font-gothamMedium rounded-3xl py-[2px] px-[10px] text-[#26395E] bg-[#CCDDFF] text-[10px] ">Update Assignment</button>
-              </td>
+      <div className="table-common overflo-custom">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Client</th>
+              <th>Assigned Clinician</th>
+              <th>Assigned Peer Support</th>
+              <th>Status</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {currentRows.map((row) => (
+              <tr key={row.id}>
+                <td>{row.id}</td>
+                <td>{row.client}</td>
+                <td>{row.assignedClinician}</td>
+                <td>{row.assignedPeerSupport}</td>
+                <td>
+                  <button onClick={() => openModal(row)} className="font-gothamMedium rounded-3xl py-[2px] px-[10px] text-[#26395E] bg-[#CCDDFF] text-[10px]">
+                    Update Assignment
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
       <div className="text-right">
-      <ReactPaginate
-        previousLabel={'<'}
-        nextLabel={'>'}
-        breakLabel={'...'}
-        breakClassName={'break-me'}
-        pageCount={Math.ceil(data.length / rowsPerPage)}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
-        onPageChange={handlePageClick}
-        containerClassName={'inline-flex mt-[34px] rounded-[5px] border border-[#d5dce9]'}
-        pageClassName={'text-[#26395e] '}  //list item
-        pageLinkClassName ={'py-2 px-4 inline-block'} //anchor tag
-        activeClassName={'bg-[#26395e] rounded-[5px] text-white'} //active anchor
-        previousLinkClassName={'py-2 px-4 inline-block'}
-        nextLinkClassName={'py-2 px-4 inline-block'}
-        disabledClassName={'opacity-50 cursor-not-allowed'}
-      />
+        <ReactPaginate
+          previousLabel={'<'}
+          nextLabel={'>'}
+          breakLabel={'...'}
+          breakClassName={'break-me'}
+          pageCount={Math.ceil(data.length / rowsPerPage)}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={'inline-flex mt-[34px] rounded-[5px] border border-[#d5dce9]'}
+          pageClassName={'text-[#26395e] '}
+          pageLinkClassName={'py-2 px-4 inline-block'}
+          activeClassName={'bg-[#26395e] rounded-[5px] text-white'}
+          previousLinkClassName={'py-2 px-4 inline-block text-[#26395e] border-r border-[#d5dce9]'}
+          nextLinkClassName={'py-2 px-4 inline-block text-[#26395e] border-l border-[#d5dce9]'}
+        />
       </div>
 
       <Modal
@@ -136,9 +141,9 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
               <label className="block mb-2">Assign Clinician</label>
               <select
                 name="assignedClinician"
-                value={formData.assignedClinician}
+                value={formData.assignedClinician || ''}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded-[10px] border-[#CDE3F1] "
+                className="w-full p-2 border rounded-[10px] border-[#CDE3F1]"
               >
                 <option value="">Select Clinician</option>
                 <option value="Clinician 1">Clinician 1</option>
@@ -150,7 +155,7 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
               <label className="block mb-2">Assign Peer Support</label>
               <select
                 name="assignedPeerSupport"
-                value={formData.assignedPeerSupport}
+                value={formData.assignedPeerSupport || ''}
                 onChange={handleInputChange}
                 className="w-full p-2 border rounded-[10px] border-[#CDE3F1]"
               >
@@ -164,7 +169,7 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
               <label className="block mb-2">Message</label>
               <select
                 name="message"
-                value={formData.message}
+                value={formData.message || ''}
                 onChange={handleInputChange}
                 className="w-full p-2 border rounded-[10px] border-[#CDE3F1]"
               >
@@ -178,7 +183,7 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
               <label className="block mb-2">Workshop</label>
               <select
                 name="workshop"
-                value={formData.workshop}
+                value={formData.workshop || ''}
                 onChange={handleInputChange}
                 className="w-full p-2 border rounded-[10px] border-[#CDE3F1]"
               >
@@ -192,7 +197,7 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
               <label className="block mb-2">Video</label>
               <select
                 name="video"
-                value={formData.video}
+                value={formData.video || ''}
                 onChange={handleInputChange}
                 className="w-full p-2 border rounded-[10px] border-[#CDE3F1]"
               >
@@ -203,9 +208,9 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
               </select>
             </div>
           </div>
-         <div className='mt-[30px] flex justify-end '>
-         <button type="submit" className="button px-[30px]">Submit<ButtonArrow /> </button>
-         </div>
+          <div className='mt-[30px] flex justify-end'>
+            <button type="submit" className="button px-[30px]">Submit <ButtonArrow/></button>
+          </div>
         </form>
       </Modal>
     </div>
@@ -213,3 +218,4 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
 };
 
 export default UnassignedClientTable;
+  

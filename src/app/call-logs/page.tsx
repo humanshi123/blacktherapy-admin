@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import deleteCross from "../../assets/images/deleteCross.png"
 import Modal from 'react-modal';
 import Image from "next/image";
-import { ButtonArrow, DeleteIcon } from '@/utils/svgicon';
+import { ButtonArrow, DeleteIcon } from "@/utils/svgicon";
 import ReactPaginate from 'react-paginate';
 import success from "../../assets/images/succes.png"
 

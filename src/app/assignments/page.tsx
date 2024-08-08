@@ -3,7 +3,6 @@ import AssignedClientsTable from "@/components/AssignedClientsTable";
 import SearchBar from "@/components/SearchBar";
 import UnassignedClientTable, {TableData} from "@/components/UnassignedClientTable";
 import { useState } from "react";
-
 const Page: React.FC = () => {
   const initialData: TableData[] = [
     { id: 1, client: 'Client A', assignedClinician: 'No Clinician Assigned', assignedPeerSupport: 'No Peer Support Assigned', status: 'Unassigned' },
@@ -31,13 +30,17 @@ const moveToAssigned = (row: TableData) => {
   setAssignedData([...assignedData, row]);
 };
 
+const updateAssignedData = (updatedRow: TableData) => {
+  setAssignedData(assignedData.map((data) => data.id === updatedRow.id ? updatedRow : data));
+};
+
   return (
     <>
       <div>
       <h1 className="font-antic text-[#283C63] text-[30px] leading-[1.2em] mb-[25px] lg:text-[40px] lg:mb-[50px]">
       Assignments
     </h1>
-    <div className="flex justify-between items-center ">
+    <div className="flex justify-between items-center gap-3 md:flex-row flex-col">
         <div>
         <button
           className={`mr-5 h-[46px] py-3 px-4 text-sm rounded-[5px] border border-[#283c63] ${activeTab === 'tab1' ? 'active bg-[#283c63] !text-white' : ''} text-[#26395e]`}
@@ -61,7 +64,7 @@ const moveToAssigned = (row: TableData) => {
         <UnassignedClientTable data={unassignedData} moveToAssigned={moveToAssigned} />
          }
         {activeTab === 'tab2' &&
-         <AssignedClientsTable data={assignedData}  />
+         <AssignedClientsTable data={assignedData} updateAssignedData={updateAssignedData} />
         }
       </div>
       </div>

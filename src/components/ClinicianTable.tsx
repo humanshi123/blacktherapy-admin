@@ -12,7 +12,7 @@ interface TableData {
   id: number;
   status: string;
   training: string;
-  name: string;
+  name: string; 
   contact: string;
   address: string;
   memberSince: string;
