@@ -11,6 +11,8 @@ interface EditModalProps {
 }
 
 const EditClinicianModal: React.FC<EditModalProps> = ({ isOpen, onRequestClose, formData, handleInputChange, handleFormSubmit }) => {
+ 
+ 
   return (
     <Modal
       isOpen={isOpen}
@@ -286,7 +288,12 @@ const EditClinicianModal: React.FC<EditModalProps> = ({ isOpen, onRequestClose, 
         </div>
         <div>
           <label className="block mb-2">About Description*</label>
-          <textarea name="" id=""  value={formData.chhoseaccount} rows={4} onChange={handleInputChange} ></textarea>
+          <textarea 
+          name="description" 
+          id=""  
+          value={formData.chhoseaccount} 
+          rows={4} 
+          ></textarea>
           </div>
      <div className='flex justify-end'>
      <button type="submit" className="mt-4 button">Submit <ButtonArrow /></button>
