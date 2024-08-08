@@ -130,6 +130,13 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   align-items: center;
   justify-content: center;
 }
+select {
+  background-image: url(/_next/static/media/select.dfc4a68e.svg);
+  background-repeat: no-repeat;
+  appearance: none;
+  -webkit-appearance: none;
+  background-position: 96%;
+}
 .button {
 color: #FFF;
 font-size: 16px;
