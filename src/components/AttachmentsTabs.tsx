@@ -1,4 +1,4 @@
-import { CloseIcon } from "@/utils/svgicon";
+import { AddMoreIcon, CloseIcon } from "@/utils/svgicon";
 import React, { useState } from "react";
 import Modal from "react-modal";
 
@@ -156,13 +156,14 @@ const AttachmentsTabs: React.FC = () => {
               </div>
             ))}
           </div>
-          <div className="mt-5">
+          <div className="mt-[28px] ">
             <button
               type="button"
               onClick={addMoreAttachments}
-              className="flex items-center text-blue-500"
+              className="flex gap-[9px] items-center text-[#707070] font-gothamBold text-xs "
             >
-              <span className="bg-[#283C63] text-white rounded-full w-[20px] h-[20px] flex items-center justify-center mr-2">+</span>
+            <AddMoreIcon/>
+           
               Add More
             </button>
           </div>
