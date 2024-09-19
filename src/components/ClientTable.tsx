@@ -1,10 +1,11 @@
 "use client";
-import { DeleteIcon } from '@/utils/svgicon';
+import { DeleteIcon, ViewIcon } from '@/utils/svgicon';
 import { useState } from 'react';
 import Modal from 'react-modal';
 import Image from 'next/image';
 import ReactPaginate from 'react-paginate';
 import deleteCross from "../assets/images/deleteCross.png";
+import ClientDetailsPopup from './ClientDetailsPopup';
 
 interface TableData {
   id: string;
@@ -60,6 +61,8 @@ const ClientTable: React.FC = () => {
   const [data, setData] = useState<TableData[]>(initialData);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState<TableData | null>(null);
+  const [clientDetailsPopup, setClientDetailsPopup]= useState(false);
+  const [clientDetails, setClientDetails] = useState<{ id: string; clientName: string } | null>(null);
 
   const rowsPerPage = 2;
 
@@ -69,6 +72,16 @@ const ClientTable: React.FC = () => {
 
   const handlePageClick = (selectedItem: { selected: number }) => {
     setCurrentPage(selectedItem.selected);
+  };
+  
+  const openClientPopup = (id: string, clientName: string) => {
+    setClientDetails({ id, clientName });
+    setClientDetailsPopup(true);
+  };
+
+  const closeClientPopup = () => {
+    setClientDetailsPopup(false);
+    setClientDetails(null); // Clear the selected client details
   };
 
   const handleToggleStatus = (id: string) => {
@@ -165,12 +178,13 @@ const ClientTable: React.FC = () => {
                   </label>
                 </td>
                 <td className="py-2 px-4">
+                 <div className='flex gap-2 '>
+                 <button onClick={() => openClientPopup(row.id, row.clientName)}> <ViewIcon /> </button>
                   <button
-                    onClick={() => handleDelete(row)}
-                    className="text-red-500"
-                  >
+                    onClick={() => handleDelete(row)} >
                     <DeleteIcon />
                   </button>
+                 </div>
                 </td>
               </tr>
             ))}
@@ -196,6 +210,16 @@ const ClientTable: React.FC = () => {
           disabledClassName={'opacity-50 cursor-not-allowed'}
         />
       </div>
+          
+    {clientDetails && (
+  <ClientDetailsPopup
+    isOpen={clientDetailsPopup}
+    onRequestClose={closeClientPopup}
+    clientId={clientDetails.id}
+    clientName={clientDetails.clientName}
+  />
+)}
+
 
       {/* Delete Modal */}
       <Modal

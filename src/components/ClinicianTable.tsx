@@ -31,7 +31,7 @@ const ClinicianTable: React.FC = () => {
       name: "Clinician A",
       contact: "123456789",
       address: "Address 1",
-      memberSince: "2021-01-01",
+      memberSince: "26 July 2023",
       noOfAppointments: 5,
       accountStatus: true,
       status2: "Interview Pending",
@@ -43,19 +43,19 @@ const ClinicianTable: React.FC = () => {
       name: "Clinician B",
       contact: "987654321",
       address: "Address 2",
-      memberSince: "2021-02-01",
+      memberSince: "26 July 2023",
       noOfAppointments: 3,
       accountStatus: false,
       status2: "Status ",
     },
     {
       id: 12,
-      status: "Active",
+      status: "Doesn’t Meet Qualifications",
       training: "Training 1",
       name: "Clinician A",
       contact: "123456789",
       address: "Address 1",
-      memberSince: "2021-01-01",
+      memberSince: "26 July 2023",
       noOfAppointments: 5,
       accountStatus: true,
       status2: "Interview Pending",
@@ -67,7 +67,7 @@ const ClinicianTable: React.FC = () => {
       name: "Clinician B",
       contact: "987654321",
       address: "Address 2",
-      memberSince: "2021-02-01",
+      memberSince: "26 July 2023",
       noOfAppointments: 3,
       accountStatus: false,
       status2: "Applicant Reviewed",
@@ -81,7 +81,7 @@ const ClinicianTable: React.FC = () => {
   const [isAssignTaskModalOpen, setIsAssignTaskModalOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState<TableData | null>(null);
   const [tableData, setTableData] = useState(data); // State to hold table data
-  const rowsPerPage = 2;
+  const rowsPerPage = 5;
 
   // Calculate the indexes for slicing the data array 
   const indexOfLastRow = (currentPage + 1) * rowsPerPage;
@@ -170,15 +170,18 @@ const ClinicianTable: React.FC = () => {
             <th>Account Status</th>
             <th>Actions</th>
             <th>Assign Task</th>
-            <th>Status2</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
           {currentRows.map((row) => (
             <tr key={row.id}>
               <td>{row.id}</td>
-              <td>{row.status}</td>
-              <td>{row.training}</td>
+              <td> <p className=" inline-block font-gothamMedium text-center leading-[normal] rounded-3xl py-[3px] px-[10px] text-[#26395E] bg-[#CCDDFF] text-[10px] ">
+              {row.status}</p></td>
+              <td><p className=" font-gothamMedium text-center leading-[normal] rounded-3xl py-[3px] px-[10px] text-[#A85C03] bg-[#fffdd1] text-[10px] ">
+              {row.training}</p>
+              </td>
               <td>{row.name}</td>
               <td>{row.contact}</td>
               <td>{row.address}</td>
@@ -236,6 +239,7 @@ const ClinicianTable: React.FC = () => {
                   </option>
                 </select>
               </td>
+             
             </tr>
           ))}
         </tbody>

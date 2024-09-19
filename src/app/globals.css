@@ -131,7 +131,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   justify-content: center;
 }
 select {
-  background-image: url(/_next/static/media/select.dfc4a68e.svg);
+  background-image: url(../assets/images/select.svg);
   background-repeat: no-repeat;
   appearance: none;
   -webkit-appearance: none;
