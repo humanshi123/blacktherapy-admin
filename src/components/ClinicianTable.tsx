@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import EditClinicianModal from "./EditClinicianModal";
 import AssignTaskModal from "./AssignTaskModal";
-import { DeleteIcon, EditIcon } from "@/utils/svgicon";
+import { DeleteIcon, EditIcon, ViewIcon } from "@/utils/svgicon";
 import deleteCross from "../assets/images/deleteCross.png"
 import Modal from 'react-modal';
 import Image from 'next/image';
+import ClinicianDetailsPopup from "./ClinicianDetailsPopup";
 
 interface TableData {
   id: number;
@@ -17,13 +18,12 @@ interface TableData {
   address: string;
   memberSince: string;
   noOfAppointments: number;
-  accountStatus: boolean;
+  accountStatus: boolean; 
   status2: string;
 }
 
 const ClinicianTable: React.FC = () => {
   const data: TableData[] = [
-    // Sample data
     {
       id: 1,
       status: "Active",
@@ -81,6 +81,8 @@ const ClinicianTable: React.FC = () => {
   const [isAssignTaskModalOpen, setIsAssignTaskModalOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState<TableData | null>(null);
   const [tableData, setTableData] = useState(data); // State to hold table data
+  const [cliniciantDetailsPopup, setCliniciantDetailsPopup]= useState(false);
+  const [clinicianDetails, setClinicianDetails] = useState<{ id: number; name: string } | null>(null);
   const rowsPerPage = 5;
 
   // Calculate the indexes for slicing the data array 
@@ -100,6 +102,17 @@ const ClinicianTable: React.FC = () => {
         item.id === id ? { ...item, accountStatus: !item.accountStatus } : item
       )
     );
+  };
+
+    
+  const openClinicianPopup = (id: number, name: string) => {
+    setClinicianDetails({ id, name });
+    setCliniciantDetailsPopup(true);
+  };
+
+  const closeClinicianPopup = () => {
+    setCliniciantDetailsPopup(false);
+    setClinicianDetails(null); // Clear the selected client details
   };
 
   const handlePageClick = (selectedItem: { selected: number }) => {
@@ -202,6 +215,7 @@ const ClinicianTable: React.FC = () => {
               </td>
               <td>
                 <div className="flex gap-2">
+                  <button onClick={() => openClinicianPopup(row.id, row.name)}><ViewIcon /> </button>
                 <button
                   onClick={() => openEditModal(row)}
                   className=""
@@ -309,6 +323,14 @@ const ClinicianTable: React.FC = () => {
           handleFormSubmit={handleFormSubmit}
         />
       )}
+    {clinicianDetails && (
+  <ClinicianDetailsPopup
+    isOpen={cliniciantDetailsPopup}
+    onRequestClose={closeClinicianPopup}
+    clinicianId={clinicianDetails.id}
+    clinicianName={clinicianDetails.name}
+  />
+)}
     </div>
   );
 };

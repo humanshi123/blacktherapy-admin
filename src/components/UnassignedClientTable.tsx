@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import Modal from 'react-modal';
-import { ButtonArrow } from '@/utils/svgicon';
+import { ButtonArrow, ViewIcon } from '@/utils/svgicon';
+import ClientsAssignmentPopup from './ClientsAssignmentPopup';
 
 export interface TableData {
   id: number;
   client: string;
   assignedClinician: string;
-  assignedPeerSupport: string;
+  assignedPeerSupport: string; 
   status: string;
   message?: string;
   workshop?: string;
@@ -30,6 +31,11 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
     workshop: '',
     video: '',
   });
+  const [assignmentClientsPopup, setAssignmentClientsPopup] = useState(false);
+  const [assignmentDetails, setAssignmentDetails] = useState<{
+    id: number;
+    client: string;
+  } | null>(null);
 
   const rowsPerPage = 4;
 
@@ -41,6 +47,17 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
     setCurrentPage(selectedItem.selected);
   };
 
+  
+  const openAssignmentsPopup = (id: number, client: string) => {
+    setAssignmentDetails({ id, client });
+    setAssignmentClientsPopup(true);
+  };
+
+  const closeAssignmentsPopup = () => {
+    setAssignmentClientsPopup(false);
+    setAssignmentDetails(null); // Clear the selected client details
+  };
+  
   const openModal = (row: TableData) => {
     setCurrentRow(row);
     setFormData({
@@ -89,6 +106,7 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
               <th>Assigned Clinician</th>
               <th>Assigned Peer Support</th>
               <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -102,6 +120,9 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
                   <button onClick={() => openModal(row)} className="font-gothamMedium rounded-3xl py-[2px] px-[10px] text-[#26395E] bg-[#CCDDFF] text-[10px]">
                     Update Assignment
                   </button>
+                </td>
+                <td>
+                  <button onClick={() => openAssignmentsPopup(row.id, row.client)}><ViewIcon /> </button>
                 </td>
               </tr>
             ))}
@@ -213,6 +234,15 @@ const UnassignedClientTable: React.FC<UnassignedClientTableProps> = ({ data, mov
           </div>
         </form>
       </Modal>
+
+      {assignmentDetails && (
+        <ClientsAssignmentPopup
+          isOpen={assignmentClientsPopup}
+          onRequestClose={closeAssignmentsPopup}
+          clientId={assignmentDetails.id}
+          clientName={assignmentDetails.client}
+        />
+      )}
     </div>
   );
 };

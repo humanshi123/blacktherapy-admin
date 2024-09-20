@@ -3,31 +3,28 @@ import React, { act, useState } from "react";
 import Modal from "react-modal";
 import Image from "next/image";
 import Client from "@/assets/images/clientpic.png";
-import PersonalInformationTab from "./PersonalInformationTab";
-import ClientsAssignmentsTab from "./ClientsAssignmentsTab";
-import ClientsInsurenceTab from "./ClientsInsurenceTab";
-import BillingInformationTab from "./BillingInformationTab";
-import ServiceAssignmentTab from "./ServiceAssignmentTab";
-import AttachmentsTabs from "./AttachmentsTabs";
 import ClientNotesTab from "./ClientNotesTab";
+import ClinicianPersonalinfo from "./ClinicianPersonalinfo";
+import ClinicianOtherInfo from "./ClinicianOtherInfo";
+import ClinicianRecord from "./ClinicianRecord";
 
-interface ClientDetailsPopupProps {
+interface ClinicianDetailsPopupProps {
   isOpen: boolean;
   onRequestClose: () => void;
-  clientId: string;
-  clientName: string;
+  clinicianId: number;
+  clinicianName: string;
 }
 
-const ClientDetailsPopup: React.FC<ClientDetailsPopupProps> = ({
+const ClinicianDetailsPopup: React.FC<ClinicianDetailsPopupProps> = ({
   isOpen,
   onRequestClose,
-  clientId,
- clientName 
+  clinicianId,
+  clinicianName 
 }) => {
-  const [activeTab, setActiveTab] = useState("tab1");
-  const handleTabClick = (tab: string) => {
+const [activeTab, setActiveTab] = useState("tab1");
+const handleTabClick = (tab: string) => {
     setActiveTab(tab);
-  };
+};
 
   return (
     <Modal
@@ -47,13 +44,13 @@ const ClientDetailsPopup: React.FC<ClientDetailsPopupProps> = ({
         <div className="flex items-center gap-[23px] mb-10">
             <div><Image src={Client} height={100} width={100} alt="Profile picture" className="rounded-full w-[100px] object-cover aspect-square " /> </div>
         <div>
-            <h3 className="font-gothamBold">{clientName}</h3>
-            <p>{clientId}</p>
+            <h3 className="font-gothamBold">{clinicianName}</h3>
+            <p>{clinicianId}</p>
         </div>
         </div>
             <div className="flex justify-between items-center gap-3 border-b border-[#CDE3F1] ">
           <button
-            className={`font-gothamMedium pb-[15px] px-[5px] text-sm  ${
+            className={`font-gothamMedium w-[25%] text-center pb-[15px] px-[5px] text-sm  ${
               activeTab === "tab1"
                 ? "active !text-[#283c63]  border-b-2 border-[#283c63]"
                 : ""
@@ -63,78 +60,45 @@ const ClientDetailsPopup: React.FC<ClientDetailsPopupProps> = ({
             Personal Information
           </button>
           <button
-            className={`font-gothamMedium pb-[15px] px-[5px] text-sm ${
+            className={`font-gothamMedium w-[25%] text-center pb-[15px] px-[5px] text-sm ${
               activeTab === "tab2"
                 ? "active !text-[#283c63]  border-b-2 border-[#283c63]"
                 : ""
             } text-[#969696]`}
             onClick={() => handleTabClick("tab2")}
           >
-            Assignments
+            Other Information
           </button>
           <button
-            className={`font-gothamMedium pb-[15px] px-[5px] text-sm  ${
+            className={`font-gothamMedium w-[25%] text-center pb-[15px] px-[5px] text-sm  ${
               activeTab === "tab3"
                 ? "active !text-[#283c63]  border-b-2 border-[#283c63]"
                 : ""
             } text-[#969696]`}
             onClick={() => handleTabClick("tab3")}
           >
-            Insurance
+            Employee Record
           </button>
           <button
-            className={`font-gothamMedium pb-[15px] px-[5px] text-sm ${
+            className={`font-gothamMedium w-[25%] text-center pb-[15px] px-[5px] text-sm  ${
               activeTab === "tab4"
                 ? "active !text-[#283c63]  border-b-2 border-[#283c63]"
                 : ""
             } text-[#969696]`}
             onClick={() => handleTabClick("tab4")}
           >
-            Billing Information
-          </button>
-          <button
-            className={`font-gothamMedium pb-[15px] px-[5px] text-sm  ${
-              activeTab === "tab5"
-                ? "active !text-[#283c63]  border-b-2 border-[#283c63]"
-                : ""
-            } text-[#969696]`}
-            onClick={() => handleTabClick("tab5")}
-          >
-            Service Assignment
-          </button>
-          <button
-            className={`font-gothamMedium pb-[15px] px-[5px] text-sm ${
-              activeTab === "tab6"
-                ? "active !text-[#283c63]  border-b-2 border-[#283c63]"
-                : ""
-            } text-[#969696]`}
-            onClick={() => handleTabClick("tab6")}
-          >
-            Attachments
-          </button>
-          <button
-            className={`font-gothamMedium pb-[15px] px-[5px] text-sm  ${
-              activeTab === "tab7"
-                ? "active !text-[#283c63]  border-b-2 border-[#283c63]"
-                : ""
-            } text-[#969696]`}
-            onClick={() => handleTabClick("tab7")}
-          >
             Notes
           </button>
         </div>
         <div className="mt-[30px]">
-          {activeTab === "tab1" && <PersonalInformationTab />}
-          {activeTab === "tab2" && <ClientsAssignmentsTab />}
-          {activeTab==="tab3" && <ClientsInsurenceTab />}
-          {activeTab==="tab4" && <BillingInformationTab /> }
-          {activeTab==="tab5" && <ServiceAssignmentTab /> }
-          {activeTab==="tab6" && <AttachmentsTabs /> }
-          {activeTab==="tab7" && <ClientNotesTab/> }
+          {activeTab === "tab1" && <ClinicianPersonalinfo />}
+          {activeTab === "tab2" && <ClinicianOtherInfo />}
+          {activeTab==="tab3" && <ClinicianRecord />}
+          {activeTab==="tab4" && <ClientNotesTab/> }
         </div>
       </div>
     </Modal>
   );
 };
 
-export default ClientDetailsPopup;
+export default ClinicianDetailsPopup;

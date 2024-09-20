@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import ReactPaginate from 'react-paginate';
-import Modal from 'react-modal';
-import { ButtonArrow } from '@/utils/svgicon';
+import React, { useState } from "react";
+import ReactPaginate from "react-paginate";
+import Modal from "react-modal";
+import { ButtonArrow, ViewIcon } from "@/utils/svgicon";
+import ClientsAssignmentPopup from "./ClientsAssignmentPopup";
 
 export interface TableData {
   id: number;
@@ -20,36 +21,58 @@ interface AssignedClientsTableProps {
   updateAssignedData: (updatedRow: TableData) => void;
 }
 
-const AssignedClientsTable: React.FC<AssignedClientsTableProps> = ({ data, updateAssignedData }) => {
+const AssignedClientsTable: React.FC<AssignedClientsTableProps> = ({
+  data,
+  updateAssignedData,
+}) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentRow, setCurrentRow] = useState<TableData | null>(null);
+  const [assignmentClientsPopup, setAssignmentClientsPopup] = useState(false);
+  const [assignmentDetails, setAssignmentDetails] = useState<{
+    id: number;
+    client: string;
+  } | null>(null);
+
   const [formData, setFormData] = useState({
-    assignedClinician: '',
-    assignedPeerSupport: '',
-    message: '',
-    workshop: '',
-    video: '',
+    assignedClinician: "",
+    assignedPeerSupport: "",
+    message: "",
+    workshop: "",
+    video: "",
   });
 
   const rowsPerPage = 4;
 
   const indexOfLastRow = (currentPage + 1) * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentRows = data.slice(indexOfFirstRow, indexOfFirstRow + rowsPerPage);
+  const currentRows = data.slice(
+    indexOfFirstRow,
+    indexOfFirstRow + rowsPerPage
+  );
 
   const handlePageClick = (selectedItem: { selected: number }) => {
     setCurrentPage(selectedItem.selected);
   };
 
+  const openAssignmentsPopup = (id: number, client: string) => {
+    setAssignmentDetails({ id, client });
+    setAssignmentClientsPopup(true);
+  };
+
+  const closeAssignmentsPopup = () => {
+    setAssignmentClientsPopup(false);
+    setAssignmentDetails(null); // Clear the selected client details
+  };
+
   const openModal = (row: TableData) => {
     setCurrentRow(row);
     setFormData({
-      assignedClinician: row.assignedClinician || '',
-      assignedPeerSupport: row.assignedPeerSupport || '',
-      message: row.message || '',
-      workshop: row.workshop || '',
-      video: row.video || '',
+      assignedClinician: row.assignedClinician || "",
+      assignedPeerSupport: row.assignedPeerSupport || "",
+      message: row.message || "",
+      workshop: row.workshop || "",
+      video: row.video || "",
     });
     setIsModalOpen(true);
   };
@@ -90,7 +113,7 @@ const AssignedClientsTable: React.FC<AssignedClientsTableProps> = ({ data, updat
               <th className="">Assigned Peer Support</th>
               <th className="">Assigned Date</th> {/* Added column for date */}
               <th className="">Status</th>
-            
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -100,11 +123,21 @@ const AssignedClientsTable: React.FC<AssignedClientsTableProps> = ({ data, updat
                 <td className="">{row.client}</td>
                 <td className="">{row.assignedClinician}</td>
                 <td className="">{row.assignedPeerSupport}</td>
-                <td>{row.dateAssigned || 'N/A'}</td>
+                <td>{row.dateAssigned || "N/A"}</td>
                 {/* <td className="">{row.assignedDate ? new Date(row.assignedDate).toLocaleDateString() : 'N/A'}</td> Display date */}
                 <td className="">
-                  <button onClick={() => openModal(row)} className="font-gothamMedium rounded-3xl py-[2px] px-[10px] text-[#26395E] bg-[#CCDDFF] text-[10px] ">
+                  <button
+                    onClick={() => openModal(row)}
+                    className="font-gothamMedium rounded-3xl py-[2px] px-[10px] text-[#26395E] bg-[#CCDDFF] text-[10px] "
+                  >
                     Update Assignment
+                  </button>
+                </td>
+                <td>
+                  <button
+                    onClick={() => openAssignmentsPopup(row.id, row.client)}
+                  >
+                    <ViewIcon />{" "}
                   </button>
                 </td>
               </tr>
@@ -114,20 +147,26 @@ const AssignedClientsTable: React.FC<AssignedClientsTableProps> = ({ data, updat
       </div>
       <div className="text-right">
         <ReactPaginate
-          previousLabel={'<'}
-          nextLabel={'>'}
-          breakLabel={'...'}
-          breakClassName={'break-me'}
+          previousLabel={"<"}
+          nextLabel={">"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
           pageCount={Math.ceil(data.length / rowsPerPage)}
           marginPagesDisplayed={2}
           pageRangeDisplayed={5}
           onPageChange={handlePageClick}
-          containerClassName={'inline-flex mt-[34px] rounded-[5px] border border-[#d5dce9]'}
-          pageClassName={'text-[#26395e] '}
-          pageLinkClassName={'py-2 px-4 inline-block'}
-          activeClassName={'bg-[#26395e] rounded-[5px] text-white'}
-          previousLinkClassName={'py-2 px-4 inline-block text-[#26395e] border-r border-[#d5dce9]'}
-          nextLinkClassName={'py-2 px-4 inline-block text-[#26395e] border-l border-[#d5dce9]'}
+          containerClassName={
+            "inline-flex mt-[34px] rounded-[5px] border border-[#d5dce9]"
+          }
+          pageClassName={"text-[#26395e] "}
+          pageLinkClassName={"py-2 px-4 inline-block"}
+          activeClassName={"bg-[#26395e] rounded-[5px] text-white"}
+          previousLinkClassName={
+            "py-2 px-4 inline-block text-[#26395e] border-r border-[#d5dce9]"
+          }
+          nextLinkClassName={
+            "py-2 px-4 inline-block text-[#26395e] border-l border-[#d5dce9]"
+          }
         />
       </div>
 
@@ -173,7 +212,7 @@ const AssignedClientsTable: React.FC<AssignedClientsTableProps> = ({ data, updat
               <label className="block mb-2">Message</label>
               <select
                 name="message"
-                value={formData.message || ''}
+                value={formData.message || ""}
                 onChange={handleInputChange}
                 className="w-full p-2 border rounded-[10px] border-[#CDE3F1]"
               >
@@ -187,7 +226,7 @@ const AssignedClientsTable: React.FC<AssignedClientsTableProps> = ({ data, updat
               <label className="block mb-2">Workshop</label>
               <select
                 name="workshop"
-                value={formData.workshop || ''}
+                value={formData.workshop || ""}
                 onChange={handleInputChange}
                 className="w-full p-2 border rounded-[10px] border-[#CDE3F1]"
               >
@@ -201,7 +240,7 @@ const AssignedClientsTable: React.FC<AssignedClientsTableProps> = ({ data, updat
               <label className="block mb-2">Video</label>
               <select
                 name="video"
-                value={formData.video || ''}
+                value={formData.video || ""}
                 onChange={handleInputChange}
                 className="w-full p-2 border rounded-[10px] border-[#CDE3F1]"
               >
@@ -212,11 +251,22 @@ const AssignedClientsTable: React.FC<AssignedClientsTableProps> = ({ data, updat
               </select>
             </div>
           </div>
-          <div className='mt-[30px] flex justify-end'>
-            <button type="submit" className="button px-[30px]">Submit <ButtonArrow /> </button>
+          <div className="mt-[30px] flex justify-end">
+            <button type="submit" className="button px-[30px]">
+              Submit <ButtonArrow />{" "}
+            </button>
           </div>
         </form>
       </Modal>
+
+      {assignmentDetails && (
+        <ClientsAssignmentPopup
+          isOpen={assignmentClientsPopup}
+          onRequestClose={closeAssignmentsPopup}
+          clientId={assignmentDetails.id}
+          clientName={assignmentDetails.client}
+        />
+      )}
     </div>
   );
 };
