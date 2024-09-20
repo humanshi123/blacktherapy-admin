@@ -35,7 +35,7 @@ const handleTabClick = (tab: string) => {
       overlayClassName="w-full h-full fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center"
     >
     <div className="flex items-center justify-between rounded-t-[20px] py-[25px] px-[35px] bg-[#283C63]  ">
-        <h2 className="font-gothamMedium !text-white">Client Details</h2>
+        <h2 className="font-gothamMedium !text-white">Clinician Details</h2>
         <button onClick={onRequestClose}>
           <CloseIcon />{" "}
         </button>
