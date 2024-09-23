@@ -102,17 +102,17 @@ const BillingInformationTab: React.FC = () => {
         onRequestClose={closeModal}
         contentLabel="Add New Entry"
         className="modal max-w-[810px] mx-auto rounded-[20px] w-full  max-h-[90vh] overflow-scroll overflo-custom "
-        overlayClassName="w-full h-full fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center"
+        overlayClassName="w-full h-full p-3 fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center"
         //ariaHideApp={false}
       >
-        <div className="flex items-center justify-between rounded-t-[20px] py-[25px] px-[35px] bg-[#283C63]  ">
+        <div className="flex items-center justify-between rounded-t-[20px]  p-5 md:py-[25px] md:px-[35px] bg-[#283C63]  ">
         <h2 className="font-gothamMedium !text-white">Add New</h2>
         <button onClick={closeModal}>
           <CloseIcon />{" "}
         </button>
       </div>
-        <form onSubmit={handleSubmit} className='bg-white px-[35px] py-10'>
-          <div className="grid grid-cols-2 gap-[30px] ">
+        <form onSubmit={handleSubmit} className='bg-white p-5 md:px-[35px] md:py-10'>
+          <div className="grid md:grid-cols-2 gap-4 md:gap-[30px] ">
             <div>
               <label className="block mb-2">Insurance Verified</label>
               <input

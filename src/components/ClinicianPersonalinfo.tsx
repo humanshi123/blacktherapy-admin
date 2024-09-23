@@ -3,7 +3,7 @@ import React from 'react';
 const ClinicianPersonalinfo = () => {
     return (
         <div>
-            <div className='grid grid-cols-3 gap-[30px]'>
+            <div className='grid md:grid-cols-3 gap-4 md:gap-[30px]'>
             <div>
             <label className="block mb-2">Gender</label>
             <p className='text-[#283C63] text-sm font-gothamMedium leading-[normal] '>Male</p>
@@ -25,7 +25,7 @@ const ClinicianPersonalinfo = () => {
             <p className='text-[#283C63] text-sm font-gothamMedium leading-[normal] '>null,Alaska,zxz</p>
             </div>
             </div>
-            <div className='mt-10 '>
+            <div className='mt-5 md:mt-10 '>
             <label className=" mb-2 mr-[10px]">No of appointments:</label>
             <span className='text-[#283C63] text-sm font-gothamMedium leading-[normal] '>0</span>
             </div>

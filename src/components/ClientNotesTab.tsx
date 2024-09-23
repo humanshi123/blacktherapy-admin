@@ -1,3 +1,4 @@
+import { CloseIcon } from "@/utils/svgicon";
 import React, { useState } from "react";
 import Modal from "react-modal";
 
@@ -84,16 +85,16 @@ const ClientNotesTab: React.FC = () => {
         onRequestClose={closeModal}
         contentLabel="Add New Note"
         className="modal max-w-[600px] mx-auto rounded-[20px] w-full  max-h-[90vh] overflow-scroll overflo-custom"
-        overlayClassName="w-full h-full fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center"
+        overlayClassName="w-full h-full px-3 fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center"
         ariaHideApp={false}
       >
-        <div className="flex items-center justify-between rounded-t-[20px] py-[25px] px-[35px] bg-[#283C63]">
+        <div className="flex items-center justify-between rounded-t-[20px]  p-5 md:py-[25px] md:px-[35px] bg-[#283C63]">
           <h2 className="font-gothamMedium !text-white">Add New Note</h2>
-          <button onClick={closeModal}>X</button>
+          <button onClick={closeModal}><CloseIcon /> </button>
         </div>
 
         {/* Form inside modal to add a note */}
-        <form onSubmit={handleSubmit} className="bg-white px-[35px] py-10">
+        <form onSubmit={handleSubmit} className="bg-white p-5 md:px-[35px] md:py-10">
           <div>
             <label className="block mb-2">Note</label>
             <textarea
@@ -105,7 +106,7 @@ const ClientNotesTab: React.FC = () => {
               required
             />
           </div>
-          <div className="mt-10 flex justify-end">
+          <div className="mt-5 md:mt-10 flex justify-end">
             <button type="submit" className="button">
               Add Note
             </button>

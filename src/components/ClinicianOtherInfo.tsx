@@ -31,7 +31,7 @@ const ClinicianOtherInfo = () => {
         { question: 'About', answer: 'a', type: 'text'}
     ];
     return (
-        <div className='grid grid-cols-3 gap-[30px]'>
+        <div className='grid md:grid-cols-3 gap-4 md:gap-[30px]'>
             {questions.map((item, index) => (
                 <div key={index}>
                     <label className="block mb-2">{item.question}</label>

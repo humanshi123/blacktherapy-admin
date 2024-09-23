@@ -207,7 +207,7 @@ export const ViewIcon =() =>(
 
 );
 export const CloseIcon =()=>(
-<svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" className="cross-icon" viewBox="0 0 46 46" fill="none">
   <circle cx="23" cy="23" r="23" fill="white"/>
   <path d="M16 31L21.7298 23.8781L16.2258 17H18.7097L23.0282 22.4159L27.3468 17H29.7742L24.2419 23.824L30 31H27.4879L22.9718 25.2863L18.4274 31H16Z" fill="#283C63"/>
 </svg>

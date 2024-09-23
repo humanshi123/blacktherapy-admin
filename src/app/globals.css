@@ -231,4 +231,23 @@ padding: 10px 15px;
 .add-clinician div {
   width: 100%;
 }
+.cross-icon {
+  width: 30px;
+  height: 30px;
+}
+.mobile-scroll {
+  overflow-x: scroll;
+}
+.mobile-scroll button {
+  width: 100%;
+  white-space: nowrap;
+}
+.button {
+  font-size: 14px;
+  line-height: normal;
+  padding: 10px 15px;
+  height: 40px;
+}
+
+
 }

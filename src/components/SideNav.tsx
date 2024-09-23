@@ -16,11 +16,12 @@ const SideNav = () => {
   };
 
   const [isCollapsed, setIsCollapsed] = useState(false);
+  
 
   const pathname = usePathname(); 
 
   const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
+    setIsCollapsed(!isCollapsed); 
   };
   const isActive = (path: string) => pathname === path ? 'active' : '';
 

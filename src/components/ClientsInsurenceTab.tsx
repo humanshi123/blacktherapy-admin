@@ -6,7 +6,7 @@ const ClientsInsurenceTab = () => {
       };
     return (
         <div>
-             <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-5">
+             <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-4 md:gap-5">
         <div className="">
           <label className="block mb-2">Insurance Company
           </label>
@@ -22,7 +22,7 @@ const ClientsInsurenceTab = () => {
           </label>
           <input type="text" name="" id="" placeholder="" />
         </div>
-        <div className="mt-[10px] col-span-2  flex justify-end">
+        <div className="mt-[10px] md:col-span-2  flex justify-end">
           <button type="submit" className="button !px-[30px]">
             Update
           </button>

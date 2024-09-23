@@ -41,7 +41,7 @@ const ClinicianRecord = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="">
         <div className='flex justify-end mb-[30px]'>
       <button
         className="!text-sm !h-[40px] !px-[30px] button"
@@ -126,15 +126,15 @@ const ClinicianRecord = () => {
         onRequestClose={() => setModalIsOpen(false)}
         contentLabel="Edit Item"
         className="modal max-w-[1180px] mx-auto rounded-[20px] w-full  max-h-[90vh] overflow-scroll overflo-custom "
-        overlayClassName="w-full h-full fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center"
+        overlayClassName="w-full h-full p-3 fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center"
     >
-    <div className="flex items-center justify-between rounded-t-[20px] py-[25px] px-[35px] bg-[#283C63]  ">
+    <div className="flex items-center justify-between rounded-t-[20px]  p-5 md:py-[25px] md:px-[35px] bg-[#283C63]  ">
         <h2 className="font-gothamMedium text-white">Edit Employment Info</h2>
         <button onClick={() => setModalIsOpen(false)}><CloseIcon /> </button>
     </div>  
-        <div className='bg-white px-[35px] py-10'>
+        <div className='bg-white p-5 md:px-[35px] md:py-10'>
           <form onSubmit={handleSubmit} className="">
-           <div className='grid grid-cols-2 gap-[30px] '>
+           <div className='grid md:grid-cols-2  gap-4 md:gap-[30px] '>
             <div>
               <label className="block mb-2">Assigned Employee ID</label>
               <input type="text"  name="employeeId" value={formData.employeeId} onChange={handleChange} />
@@ -217,7 +217,7 @@ const ClinicianRecord = () => {
 
             </div>
             {/* Add more fields as necessary */}
-            <div className='mt-10 flex justify-end'>
+            <div className='mt-5 md:mt-10 flex justify-end'>
             <button
               type="submit"
               className="button !px-[30px]"

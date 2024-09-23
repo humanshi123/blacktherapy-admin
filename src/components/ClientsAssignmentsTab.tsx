@@ -7,8 +7,9 @@ const ClientsAssignmentsTab = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-5">
-        <div className="">
+      <form onSubmit={handleSubmit} >
+<div className="grid md:grid-cols-2  gap-4 md:gap-5">
+<div className="">
           <label className="block mb-2">
             To begin, tell us why you&apos;re looking for help today?
           </label>
@@ -70,7 +71,8 @@ const ClientsAssignmentsTab = () => {
           </label>
           <input type="text" name="" id="" placeholder="" />
         </div>
-        <div className="mt-[10px] col-span-2  flex justify-end">
+</div>
+        <div className="mt-5 md:mt-10  flex justify-end">
           <button type="submit" className="button !px-[30px]">
             Update
           </button>
